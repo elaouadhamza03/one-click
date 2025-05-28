@@ -28,7 +28,26 @@ class Setting extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Accesseur pour l'URL du logo blanc
+    // Mutateurs pour gérer l'upload des fichiers
+    public function setLogoBlancAttribute($value)
+    {
+        $attribute_name = "logo_blanc";
+        $disk = "public";
+        $destination_path = "settings";
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
+
+    public function setLogoNoirAttribute($value)
+    {
+        $attribute_name = "logo_noir";
+        $disk = "public";
+        $destination_path = "settings";
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
+
+    // Accesseurs pour les URLs
     public function getLogoBlancUrlAttribute()
     {
         if ($this->logo_blanc) {
@@ -37,7 +56,6 @@ class Setting extends Model
         return null;
     }
 
-    // Accesseur pour l'URL du logo noir
     public function getLogoNoirUrlAttribute()
     {
         if ($this->logo_noir) {

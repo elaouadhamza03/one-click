@@ -21,33 +21,32 @@ class ServiceCrudController extends CrudController
         CRUD::setEntityNameStrings('service', 'services');
     }
 
-protected function setupListOperation()
-{
-    CRUD::column('titre')->label('Titre');
-    CRUD::column('description')->label('Description')->limit(50);
-    
-    CRUD::addColumn([
-        'name' => 'logo',
-        'label' => 'Logo',
-        'type' => 'image',
-        'disk' => 'public',
-        'prefix' => 'storage/', // Changé de 'storage/services/' à 'storage/'
-        'height' => '50px',
-        'width' => '50px'
-    ]);
-    
-    CRUD::addColumn([
-        'name' => 'image',
-        'label' => 'Image',
-        'type' => 'image',
-        'disk' => 'public',
-        'prefix' => 'storage/', // Changé de 'storage/services/' à 'storage/'
-        'height' => '50px',
-        'width' => '50px'
-    ]);
-    
-    CRUD::column('nom_de_page_html')->label('Page HTML');
-}
+    protected function setupListOperation()
+    {
+        CRUD::column('titre')->label('Titre');
+        CRUD::column('description')->label('Description')->limit(50);
+        
+        CRUD::addColumn([
+            'name' => 'logo',
+            'label' => 'Logo',
+            'type' => 'image',
+            'disk' => 'public',
+            'height' => '50px',
+            'width' => '50px'
+        ]);
+        
+        CRUD::addColumn([
+            'name' => 'image',
+            'label' => 'Image',
+            'type' => 'image',
+            'disk' => 'public',
+            'height' => '50px',
+            'width' => '50px'
+        ]);
+        
+        CRUD::column('nom_de_page_html')->label('Page HTML');
+    }
+
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ServiceRequest::class);

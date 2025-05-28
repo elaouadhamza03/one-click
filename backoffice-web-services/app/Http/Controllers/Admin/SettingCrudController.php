@@ -21,32 +21,31 @@ class SettingCrudController extends CrudController
         CRUD::setEntityNameStrings('paramètre', 'paramètres');
     }
 
-protected function setupListOperation()
-{
-    CRUD::column('email_contact')->label('Email de contact');
-    CRUD::column('telephone')->label('Téléphone');
-    CRUD::column('adresse')->label('Adresse')->limit(50);
-    
-    CRUD::addColumn([
-        'name' => 'logo_blanc',
-        'label' => 'Logo blanc',
-        'type' => 'image',
-        'disk' => 'public',
-        'prefix' => 'storage/', // Changé de 'storage/settings/' à 'storage/'
-        'height' => '50px',
-        'width' => '50px'
-    ]);
-    
-    CRUD::addColumn([
-        'name' => 'logo_noir',
-        'label' => 'Logo noir',
-        'type' => 'image',
-        'disk' => 'public',
-        'prefix' => 'storage/', // Changé de 'storage/settings/' à 'storage/'
-        'height' => '50px',
-        'width' => '50px'
-    ]);
-}
+    protected function setupListOperation()
+    {
+        CRUD::column('email_contact')->label('Email de contact');
+        CRUD::column('telephone')->label('Téléphone');
+        CRUD::column('adresse')->label('Adresse')->limit(50);
+        
+        CRUD::addColumn([
+            'name' => 'logo_blanc',
+            'label' => 'Logo blanc',
+            'type' => 'image',
+            'disk' => 'public',
+            'height' => '50px',
+            'width' => '50px'
+        ]);
+        
+        CRUD::addColumn([
+            'name' => 'logo_noir',
+            'label' => 'Logo noir',
+            'type' => 'image',
+            'disk' => 'public',
+            'height' => '50px',
+            'width' => '50px'
+        ]);
+    }
+
     protected function setupCreateOperation()
     {
         CRUD::setValidation(SettingRequest::class);

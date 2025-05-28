@@ -27,7 +27,26 @@ class Project extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Accesseur pour l'URL du logo
+    // Mutateurs pour gérer l'upload des fichiers
+    public function setLogoAttribute($value)
+    {
+        $attribute_name = "logo";
+        $disk = "public";
+        $destination_path = "projects";
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
+
+    public function setImageAttribute($value)
+    {
+        $attribute_name = "image";
+        $disk = "public";
+        $destination_path = "projects";
+
+        $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
+    }
+
+    // Accesseurs pour les URLs
     public function getLogoUrlAttribute()
     {
         if ($this->logo) {
@@ -36,7 +55,6 @@ class Project extends Model
         return null;
     }
 
-    // Accesseur pour l'URL de l'image
     public function getImageUrlAttribute()
     {
         if ($this->image) {

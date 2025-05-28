@@ -16,7 +16,7 @@ class ProjectRequest extends FormRequest
         return [
             'titre' => 'required|string|max:255',
             'description' => 'required|string',
-            'lien_page_html' => 'nullable|url',
+            'lien_page_html' => 'nullable|string|max:255', // Changé de 'url' à 'string'
             'lien' => 'nullable|url',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
