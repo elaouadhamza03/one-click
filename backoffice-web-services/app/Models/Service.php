@@ -46,19 +46,18 @@ class Service extends Model
     }
 
     // Accesseurs pour les URLs
-    public function getLogoUrlAttribute()
-    {
-        if ($this->logo) {
-            return asset('storage/services/' . $this->logo);
-        }
-        return null;
+public function getLogoUrlAttribute()
+{
+    if ($this->logo) {
+        return asset('storage/' . $this->logo); // Au lieu de 'storage/services/'
     }
-
-    public function getImageUrlAttribute()
-    {
-        if ($this->image) {
-            return asset('storage/services/' . $this->image);
-        }
-        return null;
-    }
+    return null;
 }
+
+public function getImageUrlAttribute()
+{
+    if ($this->image) {
+        return asset('storage/' . $this->image); // Au lieu de 'storage/services/'
+    }
+    return null;
+}}

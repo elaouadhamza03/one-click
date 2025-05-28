@@ -1,5 +1,6 @@
 <?php
 
+// App\Http\Controllers\Api\ServiceController.php
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -8,9 +9,6 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Retourner tous les services
-     */
     public function index()
     {
         $services = Service::select([
@@ -23,15 +21,10 @@ class ServiceController extends Controller
             'created_at'
         ])->orderBy('created_at', 'desc')->get();
 
-        // Ajouter l'URL complète pour les images
-        $services->transform(function ($service) {
-            if ($service->logo) {
-                $service->logo_url = asset('storage/services/' . $service->logo);
-            }
-            if ($service->image) {
-                $service->image_url = asset('storage/services/' . $service->image);
-            }
-            return $service;
+        // Ajouter les URLs via les accesseurs
+        $services->each(function ($service) {
+            $service->logo_url = $service->logo_url; // Utilise l'accesseur
+            $service->image_url = $service->image_url; // Utilise l'accesseur
         });
 
         return response()->json([
@@ -41,9 +34,6 @@ class ServiceController extends Controller
         ]);
     }
 
-    /**
-     * Retourner un service spécifique
-     */
     public function show($id)
     {
         $service = Service::find($id);
@@ -55,13 +45,9 @@ class ServiceController extends Controller
             ], 404);
         }
 
-        // Ajouter l'URL complète pour les images
-        if ($service->logo) {
-            $service->logo_url = asset('storage/services/' . $service->logo);
-        }
-        if ($service->image) {
-            $service->image_url = asset('storage/services/' . $service->image);
-        }
+        // Les URLs sont automatiquement ajoutées via les accesseurs
+        $service->logo_url = $service->logo_url;
+        $service->image_url = $service->image_url;
 
         return response()->json([
             'success' => true,
@@ -69,9 +55,6 @@ class ServiceController extends Controller
         ]);
     }
 
-    /**
-     * Rechercher par nom de page HTML
-     */
     public function getBySlug($slug)
     {
         $service = Service::where('nom_de_page_html', $slug)->first();
@@ -83,13 +66,8 @@ class ServiceController extends Controller
             ], 404);
         }
 
-        // Ajouter l'URL complète pour les images
-        if ($service->logo) {
-            $service->logo_url = asset('storage/services/' . $service->logo);
-        }
-        if ($service->image) {
-            $service->image_url = asset('storage/services/' . $service->image);
-        }
+        $service->logo_url = $service->logo_url;
+        $service->image_url = $service->image_url;
 
         return response()->json([
             'success' => true,

@@ -11,9 +11,6 @@
 <x-backpack::menu-item title="Réalisations" icon="la la-folder" :link="backpack_url('project')" />
 
 {{-- Paramètres du site --}}
-<x-backpack::menu-item title="Paramètres" icon="la la-settings" :link="backpack_url('setting')" />
+<x-backpack::menu-item title="Paramètres" icon="la la-cog" :link="backpack_url('setting')" />
 
-{{-- Gestion des utilisateurs (simple) --}}
-{{--<x-backpack::menu-item title="Utilisateurs" icon="la la-user" :link="backpack_url('user')" />--}}
 
-{{-- Gestion des utilisateurs (avancé) --}}

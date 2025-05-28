@@ -27,7 +27,7 @@ class Project extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Mutateurs pour gérer l'upload des fichiers
+    // Mutateurs pour gérer l'upload des fichiers avec Backpack
     public function setLogoAttribute($value)
     {
         $attribute_name = "logo";
@@ -46,11 +46,13 @@ class Project extends Model
         $this->uploadFileToDisk($value, $attribute_name, $disk, $destination_path);
     }
 
-    // Accesseurs pour les URLs
+    // Accesseurs CORRIGÉS pour les URLs
     public function getLogoUrlAttribute()
     {
         if ($this->logo) {
-            return asset('storage/projects/' . $this->logo);
+            // Le champ $this->logo contient déjà "projects/filename.jpg"
+            // Donc on utilise asset('storage/' + $this->logo) au lieu de asset('storage/projects/' + $this->logo)
+            return asset('storage/' . $this->logo);
         }
         return null;
     }
@@ -58,7 +60,8 @@ class Project extends Model
     public function getImageUrlAttribute()
     {
         if ($this->image) {
-            return asset('storage/projects/' . $this->image);
+            // Même correction ici
+            return asset('storage/' . $this->image);
         }
         return null;
     }

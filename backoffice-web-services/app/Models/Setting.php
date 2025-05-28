@@ -48,19 +48,19 @@ class Setting extends Model
     }
 
     // Accesseurs pour les URLs
-    public function getLogoBlancUrlAttribute()
-    {
-        if ($this->logo_blanc) {
-            return asset('storage/settings/' . $this->logo_blanc);
-        }
-        return null;
+public function getLogoBlancUrlAttribute()
+{
+    if ($this->logo_blanc) {
+        return asset('storage/' . $this->logo_blanc); // Au lieu de 'storage/settings/'
     }
+    return null;
+}
 
-    public function getLogoNoirUrlAttribute()
-    {
-        if ($this->logo_noir) {
-            return asset('storage/settings/' . $this->logo_noir);
-        }
-        return null;
+public function getLogoNoirUrlAttribute()
+{
+    if ($this->logo_noir) {
+        return asset('storage/' . $this->logo_noir); // Au lieu de 'storage/settings/'
     }
+    return null;
+}
 }

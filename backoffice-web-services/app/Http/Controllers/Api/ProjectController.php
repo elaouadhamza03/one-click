@@ -1,5 +1,6 @@
 <?php
 
+// App\Http\Controllers\Api\ProjectController.php  
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -8,9 +9,6 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    /**
-     * Retourner toutes les réalisations
-     */
     public function index()
     {
         $projects = Project::select([
@@ -24,15 +22,9 @@ class ProjectController extends Controller
             'created_at'
         ])->orderBy('created_at', 'desc')->get();
 
-        // Ajouter l'URL complète pour les images
-        $projects->transform(function ($project) {
-            if ($project->logo) {
-                $project->logo_url = asset('storage/projects/' . $project->logo);
-            }
-            if ($project->image) {
-                $project->image_url = asset('storage/projects/' . $project->image);
-            }
-            return $project;
+        $projects->each(function ($project) {
+            $project->logo_url = $project->logo_url;
+            $project->image_url = $project->image_url;
         });
 
         return response()->json([
@@ -42,9 +34,6 @@ class ProjectController extends Controller
         ]);
     }
 
-    /**
-     * Retourner une réalisation spécifique
-     */
     public function show($id)
     {
         $project = Project::find($id);
@@ -56,13 +45,8 @@ class ProjectController extends Controller
             ], 404);
         }
 
-        // Ajouter l'URL complète pour les images
-        if ($project->logo) {
-            $project->logo_url = asset('storage/projects/' . $project->logo);
-        }
-        if ($project->image) {
-            $project->image_url = asset('storage/projects/' . $project->image);
-        }
+        $project->logo_url = $project->logo_url;
+        $project->image_url = $project->image_url;
 
         return response()->json([
             'success' => true,
@@ -70,9 +54,6 @@ class ProjectController extends Controller
         ]);
     }
 
-    /**
-     * Retourner les projets récents (limités)
-     */
     public function recent($limit = 6)
     {
         $projects = Project::select([
@@ -88,15 +69,9 @@ class ProjectController extends Controller
         ->limit($limit)
         ->get();
 
-        // Ajouter l'URL complète pour les images
-        $projects->transform(function ($project) {
-            if ($project->logo) {
-                $project->logo_url = asset('storage/projects/' . $project->logo);
-            }
-            if ($project->image) {
-                $project->image_url = asset('storage/projects/' . $project->image);
-            }
-            return $project;
+        $projects->each(function ($project) {
+            $project->logo_url = $project->logo_url;
+            $project->image_url = $project->image_url;
         });
 
         return response()->json([
