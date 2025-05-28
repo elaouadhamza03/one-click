@@ -26,10 +26,10 @@ class ServiceController extends Controller
         // Ajouter l'URL complète pour les images
         $services->transform(function ($service) {
             if ($service->logo) {
-                $service->logo_url = asset('uploads/services/' . $service->logo);
+                $service->logo_url = asset('storage/services/' . $service->logo);
             }
             if ($service->image) {
-                $service->image_url = asset('uploads/services/' . $service->image);
+                $service->image_url = asset('storage/services/' . $service->image);
             }
             return $service;
         });
@@ -57,10 +57,10 @@ class ServiceController extends Controller
 
         // Ajouter l'URL complète pour les images
         if ($service->logo) {
-            $service->logo_url = asset('uploads/services/' . $service->logo);
+            $service->logo_url = asset('storage/services/' . $service->logo);
         }
         if ($service->image) {
-            $service->image_url = asset('uploads/services/' . $service->image);
+            $service->image_url = asset('storage/services/' . $service->image);
         }
 
         return response()->json([
@@ -85,10 +85,10 @@ class ServiceController extends Controller
 
         // Ajouter l'URL complète pour les images
         if ($service->logo) {
-            $service->logo_url = asset('uploads/services/' . $service->logo);
+            $service->logo_url = asset('storage/services/' . $service->logo);
         }
         if ($service->image) {
-            $service->image_url = asset('uploads/services/' . $service->image);
+            $service->image_url = asset('storage/services/' . $service->image);
         }
 
         return response()->json([

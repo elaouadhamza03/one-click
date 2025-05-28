@@ -21,27 +21,33 @@ class ProjectCrudController extends CrudController
         CRUD::setEntityNameStrings('réalisation', 'réalisations');
     }
 
-    protected function setupListOperation()
-    {
-        CRUD::column('titre')->label('Titre');
-        CRUD::column('description')->label('Description')->limit(50);
-        CRUD::addColumn([
-            'name' => 'logo',
-            'label' => 'Logo',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'projects/' // Corrigé pour cohérence
-        ]);
-        CRUD::addColumn([
-            'name' => 'image',
-            'label' => 'Image',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'projects/' // Ajouté pour afficher l'image
-        ]);
-        CRUD::column('lien')->label('Lien')->type('url');
-    }
-
+protected function setupListOperation()
+{
+    CRUD::column('titre')->label('Titre');
+    CRUD::column('description')->label('Description')->limit(50);
+    
+    CRUD::addColumn([
+        'name' => 'logo',
+        'label' => 'Logo',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/projects/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+    
+    CRUD::addColumn([
+        'name' => 'image',
+        'label' => 'Image',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/projects/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+    
+    CRUD::column('lien')->label('Lien')->type('url');
+}
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ProjectRequest::class);
@@ -55,7 +61,7 @@ class ProjectCrudController extends CrudController
             'type' => 'upload',
             'upload' => true,
             'disk' => 'public',
-            'destination_path' => 'projects' // Corrigé : storage/app/public/projects
+            'destination_path' => 'projects'
         ]);
         
         CRUD::addField([
@@ -64,7 +70,7 @@ class ProjectCrudController extends CrudController
             'type' => 'upload',
             'upload' => true,
             'disk' => 'public',
-            'destination_path' => 'projects' // Corrigé : storage/app/public/projects
+            'destination_path' => 'projects'
         ]);
         
         CRUD::field('lien_page_html')->label('Lien page HTML')->type('url');

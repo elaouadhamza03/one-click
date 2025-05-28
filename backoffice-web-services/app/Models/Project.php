@@ -26,4 +26,22 @@ class Project extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    // Accesseur pour l'URL du logo
+    public function getLogoUrlAttribute()
+    {
+        if ($this->logo) {
+            return asset('storage/projects/' . $this->logo);
+        }
+        return null;
+    }
+
+    // Accesseur pour l'URL de l'image
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('storage/projects/' . $this->image);
+        }
+        return null;
+    }
 }

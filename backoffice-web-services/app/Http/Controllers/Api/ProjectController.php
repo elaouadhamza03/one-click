@@ -27,10 +27,10 @@ class ProjectController extends Controller
         // Ajouter l'URL complète pour les images
         $projects->transform(function ($project) {
             if ($project->logo) {
-                $project->logo_url = asset('uploads/projects/' . $project->logo);
+                $project->logo_url = asset('storage/projects/' . $project->logo);
             }
             if ($project->image) {
-                $project->image_url = asset('uploads/projects/' . $project->image);
+                $project->image_url = asset('storage/projects/' . $project->image);
             }
             return $project;
         });
@@ -58,10 +58,10 @@ class ProjectController extends Controller
 
         // Ajouter l'URL complète pour les images
         if ($project->logo) {
-            $project->logo_url = asset('uploads/projects/' . $project->logo);
+            $project->logo_url = asset('storage/projects/' . $project->logo);
         }
         if ($project->image) {
-            $project->image_url = asset('uploads/projects/' . $project->image);
+            $project->image_url = asset('storage/projects/' . $project->image);
         }
 
         return response()->json([
@@ -91,10 +91,10 @@ class ProjectController extends Controller
         // Ajouter l'URL complète pour les images
         $projects->transform(function ($project) {
             if ($project->logo) {
-                $project->logo_url = asset('uploads/projects/' . $project->logo);
+                $project->logo_url = asset('storage/projects/' . $project->logo);
             }
             if ($project->image) {
-                $project->image_url = asset('uploads/projects/' . $project->image);
+                $project->image_url = asset('storage/projects/' . $project->image);
             }
             return $project;
         });

@@ -21,27 +21,32 @@ class SettingCrudController extends CrudController
         CRUD::setEntityNameStrings('paramètre', 'paramètres');
     }
 
-    protected function setupListOperation()
-    {
-        CRUD::column('email_contact')->label('Email de contact');
-        CRUD::column('telephone')->label('Téléphone');
-        CRUD::column('adresse')->label('Adresse')->limit(50);
-        CRUD::addColumn([
-            'name' => 'logo_blanc',
-            'label' => 'Logo blanc',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'settings/' // Corrigé pour cohérence
-        ]);
-        CRUD::addColumn([
-            'name' => 'logo_noir',
-            'label' => 'Logo noir',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'settings/'
-        ]);
-    }
-
+protected function setupListOperation()
+{
+    CRUD::column('email_contact')->label('Email de contact');
+    CRUD::column('telephone')->label('Téléphone');
+    CRUD::column('adresse')->label('Adresse')->limit(50);
+    
+    CRUD::addColumn([
+        'name' => 'logo_blanc',
+        'label' => 'Logo blanc',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/settings/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+    
+    CRUD::addColumn([
+        'name' => 'logo_noir',
+        'label' => 'Logo noir',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/settings/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+}
     protected function setupCreateOperation()
     {
         CRUD::setValidation(SettingRequest::class);
@@ -58,7 +63,7 @@ class SettingCrudController extends CrudController
             'type' => 'upload',
             'upload' => true,
             'disk' => 'public',
-            'destination_path' => 'settings' // Corrigé : storage/app/public/settings
+            'destination_path' => 'settings'
         ]);
         
         CRUD::addField([
@@ -67,7 +72,7 @@ class SettingCrudController extends CrudController
             'type' => 'upload',
             'upload' => true,
             'disk' => 'public',
-            'destination_path' => 'settings' // Corrigé : storage/app/public/settings
+            'destination_path' => 'settings'
         ]);
     }
 

@@ -24,10 +24,10 @@ class SettingController extends Controller
 
         // Ajouter l'URL complète pour les logos
         if ($settings->logo_blanc) {
-            $settings->logo_blanc_url = asset('uploads/settings/' . $settings->logo_blanc);
+            $settings->logo_blanc_url = asset('storage/settings/' . $settings->logo_blanc);
         }
         if ($settings->logo_noir) {
-            $settings->logo_noir_url = asset('uploads/settings/' . $settings->logo_noir);
+            $settings->logo_noir_url = asset('storage/settings/' . $settings->logo_noir);
         }
 
         return response()->json([
@@ -81,10 +81,10 @@ class SettingController extends Controller
         // Ajouter l'URL complète pour les logos
         $response = [];
         if ($settings->logo_blanc) {
-            $response['logo_blanc'] = asset('uploads/settings/' . $settings->logo_blanc);
+            $response['logo_blanc'] = asset('storage/settings/' . $settings->logo_blanc);
         }
         if ($settings->logo_noir) {
-            $response['logo_noir'] = asset('uploads/settings/' . $settings->logo_noir);
+            $response['logo_noir'] = asset('storage/settings/' . $settings->logo_noir);
         }
 
         return response()->json([

@@ -1,10 +1,12 @@
 <?php
 
+// Dans Service.php
 namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Service extends Model
 {
@@ -26,5 +28,37 @@ class Service extends Model
         'updated_at' => 'datetime',
     ];
 
-    // Mutateur supprimé - pas de transformation automatique
+    // Mutateur pour le logo
+    public function setLogoAttribute($value)
+    {
+        $this->uploadFileToDisk($value, 'logo', 'public', 'services');
+    }
+
+    // Mutateur pour l'image
+    public function setImageAttribute($value)
+    {
+        $this->uploadFileToDisk($value, 'image', 'public', 'services');
+    }
+
+    // Accesseur pour l'URL du logo
+    public function getLogoUrlAttribute()
+    {
+        if ($this->logo) {
+            return asset('storage/services/' . $this->logo);
+        }
+        return null;
+    }
+
+    // Accesseur pour l'URL de l'image
+    public function getImageUrlAttribute()
+    {
+        if ($this->image) {
+            return asset('storage/services/' . $this->image);
+        }
+        return null;
+    }
 }
+
+// Même chose pour Project.php et Setting.php avec les bons dossiers
+// Project : 'projects'
+// Setting : 'settings'

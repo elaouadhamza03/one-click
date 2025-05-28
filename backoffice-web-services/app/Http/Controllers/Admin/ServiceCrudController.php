@@ -21,34 +21,33 @@ class ServiceCrudController extends CrudController
         CRUD::setEntityNameStrings('service', 'services');
     }
 
-    protected function setupListOperation()
-    {
-        CRUD::column('titre')->label('Titre');
-        CRUD::column('description')->label('Description')->limit(50);
-        
-        CRUD::addColumn([
-            'name' => 'logo',
-            'label' => 'Logo',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'services/',
-            'height' => '50px', // Limiter la hauteur pour l'affichage
-            'width' => '50px'   // Limiter la largeur pour l'affichage
-        ]);
-        
-        CRUD::addColumn([
-            'name' => 'image',
-            'label' => 'Image',
-            'type' => 'image',
-            'disk' => 'public',
-            'prefix' => 'services/',
-            'height' => '50px',
-            'width' => '50px'
-        ]);
-        
-        CRUD::column('nom_de_page_html')->label('Page HTML');
-    }
-
+protected function setupListOperation()
+{
+    CRUD::column('titre')->label('Titre');
+    CRUD::column('description')->label('Description')->limit(50);
+    
+    CRUD::addColumn([
+        'name' => 'logo',
+        'label' => 'Logo',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/services/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+    
+    CRUD::addColumn([
+        'name' => 'image',
+        'label' => 'Image',
+        'type' => 'image',
+        'disk' => 'public',
+        'prefix' => 'storage/', // Changé de 'storage/services/' à 'storage/'
+        'height' => '50px',
+        'width' => '50px'
+    ]);
+    
+    CRUD::column('nom_de_page_html')->label('Page HTML');
+}
     protected function setupCreateOperation()
     {
         CRUD::setValidation(ServiceRequest::class);
@@ -63,8 +62,8 @@ class ServiceCrudController extends CrudController
             'upload' => true,
             'disk' => 'public',
             'destination_path' => 'services',
-            'crop' => true, // Permettre le recadrage
-            'aspect_ratio' => 1, // Ratio carré pour les logos
+            'crop' => true,
+            'aspect_ratio' => 1,
             'hint' => 'Formats acceptés: JPG, PNG, GIF. Taille max: 2MB'
         ]);
         
@@ -76,7 +75,7 @@ class ServiceCrudController extends CrudController
             'disk' => 'public',
             'destination_path' => 'services',
             'crop' => true,
-            'aspect_ratio' => 16/9, // Ratio 16:9 pour les images
+            'aspect_ratio' => 16/9,
             'hint' => 'Formats acceptés: JPG, PNG, GIF. Taille max: 2MB'
         ]);
         
