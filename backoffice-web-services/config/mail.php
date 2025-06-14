@@ -113,4 +113,15 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Email Configuration
+    |--------------------------------------------------------------------------
+    |
+    | This is the email address that will receive notifications about new devis
+    | requests and weekly reports.
+    |
+    */
+    'admin_email' => env('ADMIN_EMAIL', 'admin@example.com'),
+
 ];
